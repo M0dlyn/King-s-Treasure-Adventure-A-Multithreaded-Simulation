@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-public class Deposit implements BlockingQueue<Valuables> {
+public class Deposit<Valuables> implements BlockingQueue<Valuables> {
     private final ArrayList<Valuables> elements;
     private final int capacity;
     public Deposit(int capacity){
@@ -47,7 +47,12 @@ public class Deposit implements BlockingQueue<Valuables> {
 
     @Override
     public Valuables take() throws InterruptedException {
-        return null; //idk
+        while(isEmpty()) {
+            wait();
+        }
+        Valuables head = elements.remove(elements.size()-1); //????
+        notifyAll();
+        return head;
     }
 
     @Override

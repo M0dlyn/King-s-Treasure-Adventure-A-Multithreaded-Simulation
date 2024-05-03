@@ -44,4 +44,7 @@ public class Valuables
     }
     return instances.get(key);
   }
+    public int getValue() {
+        return value;
+    }
 }
