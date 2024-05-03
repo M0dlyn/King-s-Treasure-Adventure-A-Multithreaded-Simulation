@@ -2,6 +2,7 @@ package Valuables;
 
 public class Log
 {
+  // Singleton Log, ta klasa służy do printowania działań Threadow w konsoli: używamy jej w klasie Miner i klasie ValuableTransporter
   private static Log instance;
   private Log(){}
 

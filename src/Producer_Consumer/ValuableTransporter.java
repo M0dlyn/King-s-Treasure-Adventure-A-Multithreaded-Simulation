@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class ValuableTransporter implements Runnable {
+    // Valuable Transporter jest consumerem
     private Deposit<Valuables> deposit;
     private ArrayList valuablesToTransport;
     public ValuableTransporter(Deposit<Valuables> deposit){
@@ -27,9 +28,10 @@ public class ValuableTransporter implements Runnable {
         }
         valuablesToTransport.clear();
 
-        /* TODO Here we need to make the list for the transporter so the taken goods are saved
+        /* Here we need to make the list for the transporter so the taken goods are saved
          After transporting the valuables the list needs to be cleared and the
-         Thread needs to sleep and then continue his job */
+         Thread needs to sleep and then continue his job -> later we will change that so the transporter will put the goods
+         inside the treasure room */
 
     }
 

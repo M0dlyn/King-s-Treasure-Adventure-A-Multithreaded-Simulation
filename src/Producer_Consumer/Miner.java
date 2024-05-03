@@ -5,6 +5,7 @@ import Deposit.Deposit;
 import java.util.Random;
 
 public class Miner implements Runnable {
+    // Miner jest producerem
     private final Deposit<Valuables> deposit;
 
     public Miner(Deposit<Valuables> deposit) {

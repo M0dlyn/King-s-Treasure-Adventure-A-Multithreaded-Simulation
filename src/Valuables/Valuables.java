@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 public class Valuables
 {
+  /* Multiton dla wszystkich kosztowności dzięki tej klasie Miner "kopie" kosztowności które dodaje do depozytu */
   private ValuablesType key;
   private int value;
   private static HashMap<ValuablesType,Valuables> instances = new HashMap<>();

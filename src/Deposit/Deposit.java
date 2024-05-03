@@ -10,7 +10,9 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 public class Deposit<Valuables> implements BlockingQueue<Valuables> {
-    private final ArrayList<Valuables> elements;
+    // Depozyt jest adapterem, implementuje BlockingQueue i używa klasy, którą Olle nam podał.
+    // Z tych wszystkich metod używamy tylko kilku, więc wiekszość jest nie zimplementowana
+    private final ArrayList<Valuables> elements; // to ta klasa
     private final int capacity;
     public Deposit(int capacity){
         this.capacity = capacity;
