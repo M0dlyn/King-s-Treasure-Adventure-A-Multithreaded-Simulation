@@ -11,7 +11,9 @@ public class Main
     Deposit<Valuables> deposit = new Deposit<Valuables>(20);
     Miner miner1 = new Miner(deposit);
     ValuableTransporter valuableTransporter1 = new ValuableTransporter(deposit);
-    miner1.run();
-    valuableTransporter1.run();
+    Thread minerThread = new Thread(miner1);
+    Thread transporterThread = new Thread(valuableTransporter1);
+    minerThread.start();
+    transporterThread.start();
   }
 }

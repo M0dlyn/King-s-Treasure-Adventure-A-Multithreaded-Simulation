@@ -11,7 +11,7 @@ public class Miner implements Runnable {
         this.deposit = deposit;
     }
 
-    private void Mine() throws InterruptedException {
+    private synchronized void Mine() throws InterruptedException {
         Random randomNumbers = new Random();
         int number = randomNumbers.nextInt(1, 7);
         switch (number) {

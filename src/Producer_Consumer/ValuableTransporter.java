@@ -13,7 +13,7 @@ public class ValuableTransporter implements Runnable {
         this.deposit = deposit;
         this.valuablesToTransport = new ArrayList<>();
     }
-    private void Take() throws InterruptedException {
+    private synchronized void Take() throws InterruptedException {
         Random randomNumbers = new Random();
         int targetValue = randomNumbers.nextInt(151) + 50;
         int value = 0;

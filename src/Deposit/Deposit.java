@@ -46,7 +46,7 @@ public class Deposit<Valuables> implements BlockingQueue<Valuables> {
     }
 
     @Override
-    public Valuables take() throws InterruptedException {
+    public synchronized Valuables take() throws InterruptedException {
         while(isEmpty()) {
             wait();
         }
