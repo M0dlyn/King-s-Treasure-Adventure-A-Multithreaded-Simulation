@@ -13,7 +13,7 @@ public class TreasureRoom implements Treasury
   public TreasureRoom(){
     this.listOfValuables = new ArrayList<>();
   }
-  @Override public void addValuables(Person person, ArrayList<Valuables> valuables)
+  @Override public synchronized void addValuables(Person person, ArrayList<Valuables> valuables)
   {
     int totalValue = 0;
     for (int i = 0; i < valuables.size(); i++)
@@ -24,19 +24,23 @@ public class TreasureRoom implements Treasury
     Log.getInstance().logAction("Valuables of the value " + totalValue + " has been added to the treasure room by " + person);
   }
 
-  @Override public void retrieveValuables(Person person)
+  @Override public synchronized ArrayList<Valuables> retrieveValuables(Person person)
   {
     int totalValue = 0;
+    ArrayList<Valuables> takenValuables = new ArrayList<>();
     for (int i = 0; i < listOfValuables.size(); i++)
     {
       totalValue += listOfValuables.get(i).getValue();
+      takenValuables.add(listOfValuables.get(i));
     }
     Log.getInstance().logAction(person + " is taking the valuables from the treasure room...");
     listOfValuables.clear();
     Log.getInstance().logAction(person + " has taken valuables of the total value: " + totalValue);
+    return takenValuables;
+
   }
 
-  @Override public void lookAtValuables(Person person)
+  @Override public  synchronized void lookAtValuables(Person person)
   {
     /* We can extend it so the list of what valuables are in the treasure room e.g. [Emerald,Jewel,Diamond etc.] */
     int totalValue = 0;

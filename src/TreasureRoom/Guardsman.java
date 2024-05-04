@@ -17,9 +17,9 @@ public class Guardsman implements Treasury
   {
     this.treasury  = treasury;
   }
-  @Override public void addValuables(Person person, ArrayList<Valuables> valuables)
+  @Override public synchronized void addValuables(Person person, ArrayList<Valuables> valuables)
   {
-    if(person instanceof ValuableTransporter)
+    if(person instanceof ValuableTransporter || person instanceof King)
     {
       treasury.addValuables(person, valuables);
     }
@@ -29,19 +29,20 @@ public class Guardsman implements Treasury
     }
   }
 
-  @Override public void retrieveValuables(Person person)
+  @Override public synchronized ArrayList<Valuables> retrieveValuables(Person person)
   {
     if(person instanceof King)
     {
-      treasury.retrieveValuables(person);
+      return treasury.retrieveValuables(person);
     }
     else
     {
      Log.getInstance().logAction(person + "tried to steal from the treasure room!! Guardsman stopped him");
     }
+    return null;
   }
 
-  @Override public void lookAtValuables(Person person)
+  @Override public synchronized void lookAtValuables(Person person)
   {
     if(person instanceof Accountant || person instanceof King)
     {

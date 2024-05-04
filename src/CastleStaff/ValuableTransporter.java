@@ -1,6 +1,8 @@
 package CastleStaff;
 
 import Deposit.Deposit;
+import TreasureRoom.AccessManager;
+import TreasureRoom.Treasury;
 import Valuables.*;
 import java.util.ArrayList;
 
@@ -10,9 +12,11 @@ public class ValuableTransporter implements Runnable, Person{
     // Valuable Transporter jest consumerem
     private Deposit<Valuables> deposit;
     private ArrayList<Valuables> valuablesToTransport;
-    public ValuableTransporter(Deposit<Valuables> deposit){
+    private final AccessManager accessManager;
+    public ValuableTransporter(Deposit<Valuables> deposit, AccessManager accessManager){
         this.deposit = deposit;
         this.valuablesToTransport = new ArrayList<>();
+        this.accessManager = accessManager;
     }
     private synchronized void Take() throws InterruptedException {
         Random randomNumbers = new Random();
@@ -25,9 +29,18 @@ public class ValuableTransporter implements Runnable, Person{
            valuablesToTransport.add(takenValuable);
            int takenValue = takenValuable.getValue();
            value += takenValue;
+            try {
+                Treasury treasury = accessManager.requestWrite();
+                Log.getInstance().logAction("Valuable Transporter went to the Treasure room");
+                treasury.addValuables(this, valuablesToTransport);
+                valuablesToTransport.clear();
+                Log.getInstance().logAction("Valuable Transporter has added the valuables to the treasure room");
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } finally {
+                accessManager.releaseWrite();
+            }
         }
-        Log.getInstance().logAction("Valuable Transporter went to the Treasure room");
-        valuablesToTransport.clear();
 
         /* Here we need to make the list for the transporter so the taken goods are saved
          After transporting the valuables the list needs to be cleared and the
