@@ -65,7 +65,7 @@ king_treasure_adventure/
     - JUnit 4.13.2: https://repo1.maven.org/maven2/junit/junit/4.13.2/junit-4.13.2.jar
 3. Place the downloaded libraries in the `lib/` directory.
 4. Open the project in your favorite IDE or text editor.
-5. Run the main method in the `King.java` class to start the simulation.
+5. Run the main method in the `Main.java` class to start the simulation.
 
 ## Design Patterns Used
 
