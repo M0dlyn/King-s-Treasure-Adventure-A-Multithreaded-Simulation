@@ -1,4 +1,4 @@
-package Producer_Consumer;
+package CastleStaff;
 
 import Deposit.Deposit;
 import Valuables.*;
@@ -6,17 +6,17 @@ import java.util.ArrayList;
 
 import java.util.Random;
 
-public class ValuableTransporter implements Runnable {
+public class ValuableTransporter implements Runnable, Person{
     // Valuable Transporter jest consumerem
     private Deposit<Valuables> deposit;
-    private ArrayList valuablesToTransport;
+    private ArrayList<Valuables> valuablesToTransport;
     public ValuableTransporter(Deposit<Valuables> deposit){
         this.deposit = deposit;
         this.valuablesToTransport = new ArrayList<>();
     }
     private synchronized void Take() throws InterruptedException {
         Random randomNumbers = new Random();
-        int targetValue = randomNumbers.nextInt(151) + 50;
+        int targetValue = randomNumbers.nextInt(151) + 150;
         int value = 0;
         while(value<targetValue){
            Log.getInstance().logAction("Valuable Transporter is taking...");
@@ -26,6 +26,7 @@ public class ValuableTransporter implements Runnable {
            int takenValue = takenValuable.getValue();
            value += takenValue;
         }
+        Log.getInstance().logAction("Valuable Transporter went to the Treasure room");
         valuablesToTransport.clear();
 
         /* Here we need to make the list for the transporter so the taken goods are saved
@@ -51,5 +52,8 @@ public class ValuableTransporter implements Runnable {
             }
         }
 
+    }
+    public String toString(){
+        return "Valuable Transporter";
     }
 }
