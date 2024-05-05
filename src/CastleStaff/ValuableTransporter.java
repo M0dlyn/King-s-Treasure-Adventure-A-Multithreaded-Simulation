@@ -34,7 +34,6 @@ public class ValuableTransporter implements Runnable, Person{
                 Log.getInstance().logAction("Valuable Transporter went to the Treasure room");
                 treasury.addValuables(this, valuablesToTransport);
                 valuablesToTransport.clear();
-                Log.getInstance().logAction("Valuable Transporter has added the valuables to the treasure room");
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             } finally {
